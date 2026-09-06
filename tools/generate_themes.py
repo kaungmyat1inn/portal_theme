@@ -286,7 +286,7 @@ var currentAuth='voucher';
 function sessionId(){try{return new URL(window.top.location.href).searchParams.get('sessionId')}catch(e){return new URL(location.href).searchParams.get('sessionId')}}
 function chooseAuth(type){currentAuth=type;document.querySelectorAll('.field').forEach(function(e){e.classList.remove('active')});document.querySelectorAll('.tabs button').forEach(function(e){e.classList.toggle('active',e.dataset.auth===type)});var field=document.getElementById(type+'-field');if(field)field.classList.add('active')}
 function selectVoucher(){chooseAuth('voucher');document.getElementById('voucher').focus()}
-function loadConfig(data){var allowed=['voucher','fixaccount'];var options=((data.custom_html&&data.custom_html.login_options)||['voucher']).filter(function(value){return allowed.indexOf(value)>=0});if(!options.length)options=['voucher'];var labels={voucher:'Voucher',fixaccount:'Account'};var map={voucher:'voucher',fixaccount:'account'};var tabs=document.getElementById('tabs');tabs.innerHTML='';options.forEach(function(value){var auth=map[value]||value;var b=document.createElement('button');b.type='button';b.dataset.auth=auth;b.textContent=labels[value]||value;b.onclick=function(){chooseAuth(auth)};tabs.appendChild(b)});document.getElementById('account-switch').style.display=options.indexOf('fixaccount')>=0?'block':'none';document.getElementById('voucher-switch').style.display=options.indexOf('voucher')>=0?'block':'none';var preferred=options.indexOf('voucher')>=0?'voucher':(map[options[0]]||options[0]);chooseAuth(preferred)}
+function loadConfig(data){var allowed=['voucher','fixaccount'];var options=((data.custom_html&&data.custom_html.login_options)||['voucher']).filter(function(value){return allowed.indexOf(value)>=0});if(!options.length)options=['voucher'];var labels={voucher:'Voucher',fixaccount:'Account'};var map={voucher:'voucher',fixaccount:'account'};var tabs=document.getElementById('tabs');tabs.innerHTML='';options.forEach(function(value){var auth=map[value]||value;var b=document.createElement('button');b.type='button';b.dataset.auth=auth;b.textContent=labels[value]||value;b.onclick=function(){chooseAuth(auth)};tabs.appendChild(b)});var preferred=options.indexOf('voucher')>=0?'voucher':(map[options[0]]||options[0]);chooseAuth(preferred)}
 async function login(){var message=document.getElementById('message');message.textContent='';var payload={lang:'en_US',authType:currentAuth,sessionId:sessionId()};if(currentAuth==='voucher'){payload.account=document.getElementById('voucher').value.trim();if(!payload.account){message.textContent='Please enter voucher code';return}}else if(currentAuth==='account'){payload.authType='fixaccount';payload.account=document.getElementById('account').value.trim();payload.password=document.getElementById('password').value;if(!payload.account||!payload.password){message.textContent='Please enter username and password';return}}else{message.textContent='Please choose Voucher or Account login';return}var button=document.getElementById('login');button.disabled=true;button.textContent='Connecting...';try{var response=await fetch('/api/auth/general',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});var result=await response.json();if(result.success&&result.result&&result.result.logonUrl){location.href=result.result.logonUrl}else{message.textContent=result.message||'Login failed'}}catch(e){message.textContent='Unable to connect'}finally{button.disabled=false;button.textContent='Connect to Internet'}}
 document.getElementById('login').addEventListener('click',login);
 """)
@@ -310,7 +310,6 @@ def ruijie_common_css(theme: dict) -> str:
     .field label{{display:block;font-size:13px;color:{muted};margin:0 0 7px}}
     .field input{{width:100%;height:50px;border:1px solid {sec};border-radius:10px;background:#0003;color:{txt};padding:0 14px;font-size:16px;outline:none;font-family:inherit}}
     .field input:focus{{border-color:{p}}}
-    .auth-switch{{display:none;width:100%;border:0;background:transparent;color:{p};padding:12px 4px 2px;font-size:13px;font-weight:700;text-align:center;font-family:inherit;cursor:pointer}}
     #message{{min-height:24px;padding-top:7px;color:#ff8a80;font-size:12px;text-align:center}}
     #login{{width:100%;height:50px;border:0;border-radius:10px;background:{p};color:{pt};font-size:16px;font-weight:800;font-family:inherit;cursor:pointer}}
     .packages{{margin-top:24px}}.packages h2{{text-align:center;font-size:13px;letter-spacing:.6px;color:{muted};margin:0 0 11px}}
@@ -323,8 +322,12 @@ def ruijie_common_css(theme: dict) -> str:
 
 
 def ruijie_layout_glass(theme: dict) -> tuple[str, str]:
+    # No card box here, same call as Mikrotik's layout_glass(): the whole
+    # point of a Ruijie portal is the merchant's own background photo, so a
+    # filled/blurred panel that hides it defeats the feature. Content sits
+    # directly on the ambient background; only a soft corner glow remains.
     css = compact(f"""
-    main{{overflow:hidden;background:{theme['surface']};border:1px solid {theme['secondary']};border-radius:{theme['radius']};padding:32px 24px 26px;box-shadow:{theme['shadow']};backdrop-filter:blur(16px)}}
+    main{{padding:32px 24px 26px}}
     main::before{{content:'';position:absolute;width:190px;height:190px;border-radius:50%;top:-70px;right:-70px;background:#ffffff14;pointer-events:none}}
     .brand{{text-align:center;position:relative}}
     .logo{{font-size:40px;font-weight:800;color:{theme['primary']}}}
@@ -339,8 +342,11 @@ def ruijie_layout_glass(theme: dict) -> tuple[str, str]:
 
 
 def ruijie_layout_classic(theme: dict) -> tuple[str, str]:
+    # No filled card -- see ruijie_layout_glass(). The thin inset rule is a
+    # frame, not a panel: it has no background of its own, so it doesn't
+    # hide the photo behind it.
     css = compact(f"""
-    main{{background:{theme['surface']};border:1px solid {theme['secondary']};border-radius:{theme['radius']};padding:36px 26px 28px;box-shadow:{theme['shadow']}}}
+    main{{padding:36px 26px 28px}}
     main::before{{content:'';position:absolute;inset:10px;border:1px solid {theme['primary']}26;pointer-events:none}}
     .brand{{text-align:center;position:relative}}
     .ornament{{display:flex;align-items:center;gap:9px;margin:0 auto 14px;color:{theme['primary']};width:80%}}
@@ -361,9 +367,11 @@ def ruijie_layout_classic(theme: dict) -> tuple[str, str]:
 
 
 def ruijie_layout_cyberpunk(theme: dict) -> tuple[str, str]:
+    # No filled card -- see ruijie_layout_glass(). The neon outline is a
+    # bare 1px border (no fill), so the background photo still reads through.
     css = compact(f"""
     body::after{{content:'';position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,#00000000 0 2px,#00000024 3px 4px)}}
-    main{{background:{theme['surface']};border:1px solid {theme['primary']}66;border-radius:{theme['radius']};padding:30px 24px 26px;box-shadow:{theme['shadow']}}}
+    main{{border:1px solid {theme['primary']}66;padding:30px 24px 26px}}
     .brand{{text-align:left}}
     .signal{{display:flex;gap:5px;margin-bottom:16px}}
     .signal i{{display:block;height:5px;background:{theme['primary']}}}
@@ -382,8 +390,9 @@ def ruijie_layout_cyberpunk(theme: dict) -> tuple[str, str]:
 
 
 def ruijie_layout_dark(theme: dict) -> tuple[str, str]:
+    # No filled card -- see ruijie_layout_glass().
     css = compact(f"""
-    main{{background:{theme['surface']};border:1px solid {theme['secondary']};border-radius:{theme['radius']};padding:30px 24px 26px;box-shadow:{theme['shadow']}}}
+    main{{padding:30px 24px 26px}}
     .brand{{text-align:left}}
     .logo{{font-size:34px;font-weight:800;color:{theme['primary']};margin-bottom:6px}}
     .brand h1{{font-size:24px;margin:0 0 5px;letter-spacing:-.5px}}
@@ -419,14 +428,12 @@ def ruijie_index_html(theme: dict) -> str:
       <section class="field" id="voucher-field">
         <label>Voucher Code</label>
         <input id="voucher" autocomplete="one-time-code" placeholder="Enter voucher code">
-        <button class="auth-switch" id="account-switch" type="button" onclick="chooseAuth('account')">Login with account</button>
       </section>
       <section class="field" id="account-field">
         <label>Username</label>
         <input id="account" autocomplete="username" placeholder="Enter username">
         <label style="margin-top:10px">Password</label>
         <input id="password" type="password" autocomplete="current-password" placeholder="Enter password">
-        <button class="auth-switch" id="voucher-switch" type="button" onclick="chooseAuth('voucher')">Login with voucher code</button>
       </section>
       <div id="message"></div>
       <button id="login" type="button">Connect to Internet</button>
