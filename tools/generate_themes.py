@@ -336,7 +336,7 @@ def ruijie_layout_glass(theme: dict) -> tuple[str, str]:
     """)
     brand = (
         "<header class='brand'><div class='logo'>R</div>"
-        "<h1>High Speed Wi-Fi</h1><p>Connect with your voucher or account</p></header>"
+        "<h1>{{SHOP_NAME}}</h1><p>Connect with your voucher or account</p></header>"
     )
     return css, brand
 
@@ -361,7 +361,7 @@ def ruijie_layout_classic(theme: dict) -> tuple[str, str]:
     """)
     brand = (
         "<header class='brand'><div class='ornament'><i class='diamond'></i></div>"
-        "<h1>High Speed Wi-Fi</h1><p>Connect with your voucher or account</p></header>"
+        "<h1>{{SHOP_NAME}}</h1><p>Connect with your voucher or account</p></header>"
     )
     return css, brand
 
@@ -384,7 +384,7 @@ def ruijie_layout_cyberpunk(theme: dict) -> tuple[str, str]:
     """)
     brand = (
         "<header class='brand'><div class='signal'><i></i><i></i><i></i></div>"
-        "<h1>High Speed Wi-Fi</h1><p>Connect with your voucher or account</p></header>"
+        "<h1>{{SHOP_NAME}}</h1><p>Connect with your voucher or account</p></header>"
     )
     return css, brand
 
@@ -401,7 +401,7 @@ def ruijie_layout_dark(theme: dict) -> tuple[str, str]:
     """)
     brand = (
         "<header class='brand'><div class='logo'>R</div>"
-        "<h1>High Speed Wi-Fi</h1><p>Connect with your voucher or account</p></header>"
+        "<h1>{{SHOP_NAME}}</h1><p>Connect with your voucher or account</p></header>"
     )
     return css, brand
 
@@ -443,7 +443,7 @@ def ruijie_index_html(theme: dict) -> str:
     return (
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>"
         "<meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1'>"
-        "<meta http-equiv='Cache-Control' content='no-cache'><title>Wi-Fi Access</title>"
+        "<meta http-equiv='Cache-Control' content='no-cache'><title>{{SHOP_NAME}}</title>"
         f"<style>{css}</style></head><body>{body}"
         f"<script>{RUIJIE_LOGIN_JS}</script>"
         "<script src='./loadConfig.json'></script></body></html>"
