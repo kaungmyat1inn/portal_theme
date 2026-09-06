@@ -15,9 +15,10 @@ sibling file sets from the same `THEMES` entry:
   (`index.html` + `loadConfig.json`), used by the voucher_maker (Ruijie) app.
   Ruijie portals aren't router-templated HTML; they're a small single-page
   app that calls Ruijie's `/api/auth/general` and get zipped together with a
-  background image and uploaded as a custom portal. `index.html` keeps a
-  `{{PACKAGES_SECTION}}` token that the app fills in with the merchant's
-  actual voucher package/price list at apply-time — don't remove it.
+  background image and uploaded as a custom portal. `index.html` keeps
+  `{{PACKAGES_SECTION}}` and `{{SHOP_NAME}}` tokens that the app fills in at
+  apply-time with the merchant's actual voucher package/price list and shop
+  name — don't remove them.
 
 ## Adding or editing a theme
 

@@ -330,12 +330,11 @@ def ruijie_layout_glass(theme: dict) -> tuple[str, str]:
     main{{padding:32px 24px 26px}}
     main::before{{content:'';position:absolute;width:190px;height:190px;border-radius:50%;top:-70px;right:-70px;background:#ffffff14;pointer-events:none}}
     .brand{{text-align:center;position:relative}}
-    .logo{{font-size:40px;font-weight:800;color:{theme['primary']}}}
-    .brand h1{{font-size:25px;margin:7px 0 4px;letter-spacing:-.5px}}
+    .brand h1{{font-size:25px;margin:0 0 4px;letter-spacing:-.5px}}
     .brand p{{margin:0;color:{theme['mutedText']};font-size:13px}}
     """)
     brand = (
-        "<header class='brand'><div class='logo'>R</div>"
+        "<header class='brand'>"
         "<h1>{{SHOP_NAME}}</h1><p>Connect with your voucher or account</p></header>"
     )
     return css, brand
@@ -394,13 +393,12 @@ def ruijie_layout_dark(theme: dict) -> tuple[str, str]:
     css = compact(f"""
     main{{padding:30px 24px 26px}}
     .brand{{text-align:left}}
-    .logo{{font-size:34px;font-weight:800;color:{theme['primary']};margin-bottom:6px}}
     .brand h1{{font-size:24px;margin:0 0 5px;letter-spacing:-.5px}}
     .brand p{{margin:0;color:{theme['mutedText']};font-size:13px}}
     .field input{{background:#0c0f15}}
     """)
     brand = (
-        "<header class='brand'><div class='logo'>R</div>"
+        "<header class='brand'>"
         "<h1>{{SHOP_NAME}}</h1><p>Connect with your voucher or account</p></header>"
     )
     return css, brand
