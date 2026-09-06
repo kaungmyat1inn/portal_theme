@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "backgrounds": [
+    {
+      "id": "astronaut",
+      "name": "Astronaut",
+      "version": "1",
+      "enabled": true,
+      "image": "images/astronaut.webp"
+    },
+    {
+      "id": "bubble",
+      "name": "Bubble",
+      "version": "1",
+      "enabled": true,
+      "image": "images/bubble.jpg"
+    },
+    {
+      "id": "hogwarts",
+      "name": "Hogwarts",
+      "version": "1",
+      "enabled": true,
+      "image": "images/hogwarts.webp"
+    },
+    {
+      "id": "meo",
+      "name": "Meo",
+      "version": "1",
+      "enabled": true,
+      "image": "images/meo.jpg"
+    },
+    {
+      "id": "night-city",
+      "name": "Night City",
+      "version": "1",
+      "enabled": true,
+      "image": "images/nightcity.webp"
+    },
+    {
+      "id": "one-piece",
+      "name": "One Piece",
+      "version": "1",
+      "enabled": true,
+      "image": "images/onepiece.jpg"
+    },
+    {
+      "id": "space",
+      "name": "Space",
+      "version": "1",
+      "enabled": true,
+      "image": "images/space.jpg"
+    },
+    {
+      "id": "spidy",
+      "name": "Spidy",
+      "version": "1",
+      "enabled": true,
+      "image": "images/spidy.jpg"
+    }
+  ],
+  "themes": [
+    {
+      "id": "glass",
+      "name": "Glass UI",
+      "description": "Frosted glass over a deep blue and violet glow.",
+      "version": "1.0.0",
+      "enabled": true,
+      "preview": "themes/glass/1.0.0/preview.png?render=actual",
+      "previewOverlay": "themes/glass/1.0.0/preview-overlay.png?render=actual",
+      "colors": {
+        "background": "radial-gradient(circle at 18% 14%,#22d3ee70 0 140px,transparent 141px),radial-gradient(circle at 88% 78%,#8b5cf670 0 190px,transparent 191px),linear-gradient(145deg,#071322,#17112d)",
+        "surface": "#ffffff18",
+        "text": "#f8fbff",
+        "mutedText": "#c6d2e8",
+        "primary": "#67e8f9",
+        "primaryText": "#07131c",
+        "secondary": "#ffffff3d",
+        "radius": "28px",
+        "shadow": "0 28px 70px #02061799"
+      },
+      "files": {
+        "login": "themes/glass/1.0.0/login.html",
+        "alogin": "themes/glass/1.0.0/alogin.html",
+        "redirect": "themes/glass/1.0.0/redirect.html",
+        "status": "themes/glass/1.0.0/status.html"
+      },
+      "ruijieFiles": {
+        "index": "ruijie/glass/1.0.0/index.html",
+        "loadConfig": "ruijie/glass/1.0.0/loadConfig.json"
+      }
+    },
+    {
+      "id": "classic",
+      "name": "Classic",
+      "description": "Warm paper tones with traditional serif type and fine rules.",
+      "version": "1.0.0",
+      "enabled": true,
+      "preview": "themes/classic/1.0.0/preview.png?render=actual",
+      "previewOverlay": "themes/classic/1.0.0/preview-overlay.png?render=actual",
+      "colors": {
+        "background": "linear-gradient(135deg,#f2eadb,#dfcfb4)",
+        "surface": "#fffaf0",
+        "text": "#30271d",
+        "mutedText": "#796956",
+        "primary": "#744a24",
+        "primaryText": "#fffaf0",
+        "secondary": "#c8b28f",
+        "radius": "3px",
+        "shadow": "0 22px 55px #51391f33"
+      },
+      "files": {
+        "login": "themes/classic/1.0.0/login.html",
+        "alogin": "themes/classic/1.0.0/alogin.html",
+        "redirect": "themes/classic/1.0.0/redirect.html",
+        "status": "themes/classic/1.0.0/status.html"
+      },
+      "ruijieFiles": {
+        "index": "ruijie/classic/1.0.0/index.html",
+        "loadConfig": "ruijie/classic/1.0.0/loadConfig.json"
+      }
+    },
+    {
+      "id": "cyberpunk",
+      "name": "Cyberpunk",
+      "description": "Angular neon cyan and magenta interface on black.",
+      "version": "1.0.0",
+      "enabled": true,
+      "preview": "themes/cyberpunk/1.0.0/preview.png?render=actual",
+      "previewOverlay": "themes/cyberpunk/1.0.0/preview-overlay.png?render=actual",
+      "colors": {
+        "background": "linear-gradient(#07101acc 1px,transparent 1px),linear-gradient(90deg,#07101acc 1px,transparent 1px),radial-gradient(circle at 80% 12%,#ff2bd63d,transparent 36%),#02050a",
+        "surface": "#080d17f2",
+        "text": "#f6f8ff",
+        "mutedText": "#81dce4",
+        "primary": "#20f6ff",
+        "primaryText": "#02070c",
+        "secondary": "#ff2bd6",
+        "radius": "2px",
+        "shadow": "12px 12px 0 #ff2bd633,0 0 45px #20f6ff1f"
+      },
+      "files": {
+        "login": "themes/cyberpunk/1.0.0/login.html",
+        "alogin": "themes/cyberpunk/1.0.0/alogin.html",
+        "redirect": "themes/cyberpunk/1.0.0/redirect.html",
+        "status": "themes/cyberpunk/1.0.0/status.html"
+      },
+      "ruijieFiles": {
+        "index": "ruijie/cyberpunk/1.0.0/index.html",
+        "loadConfig": "ruijie/cyberpunk/1.0.0/loadConfig.json"
+      }
+    },
+    {
+      "id": "dark",
+      "name": "Dark UI",
+      "description": "Clean charcoal interface with a restrained violet accent.",
+      "version": "1.0.0",
+      "enabled": true,
+      "preview": "themes/dark/1.0.0/preview.png?render=actual",
+      "previewOverlay": "themes/dark/1.0.0/preview-overlay.png?render=actual",
+      "colors": {
+        "background": "radial-gradient(circle at 50% -10%,#30364a 0,transparent 45%),linear-gradient(160deg,#050609,#0c0f15)",
+        "surface": "#151820",
+        "text": "#f4f6fb",
+        "mutedText": "#929aad",
+        "primary": "#7c5cff",
+        "primaryText": "#ffffff",
+        "secondary": "#303541",
+        "radius": "20px",
+        "shadow": "0 28px 70px #000000a6"
+      },
+      "files": {
+        "login": "themes/dark/1.0.0/login.html",
+        "alogin": "themes/dark/1.0.0/alogin.html",
+        "redirect": "themes/dark/1.0.0/redirect.html",
+        "status": "themes/dark/1.0.0/status.html"
+      },
+      "ruijieFiles": {
+        "index": "ruijie/dark/1.0.0/index.html",
+        "loadConfig": "ruijie/dark/1.0.0/loadConfig.json"
+      }
+    }
+  ]
+}
